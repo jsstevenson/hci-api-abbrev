@@ -35,7 +35,7 @@
             <div class="title-text-box">
               <b>
                 <h2 style="color: rgb(80, 80, 80); text-transform: none">
-                  HCI and Web API Design in Informatics
+                  HCI and Web APIs in Informatics
                 </h2>
                 <p style="color: rgb(80, 80, 80)">James Stevenson</p>
               </b>
@@ -55,6 +55,7 @@
           </ul>
         </section>
 
+        <!-- %%%%%%%%%%%%%%%%%%%% APIs %%%%%%%%%%%%%%%%%%%% -->
         <section>
           <section data-background-image="images/dog.png">
             <div
@@ -160,6 +161,7 @@
           </section>
         </section>
 
+        <!-- %%%%%%%%%%%%%%%%%%%% APIs %%%%%%%%%%%%%%%%%%%% -->
         <section>
           <section data-background-image="images/log.png">
             <div
@@ -274,6 +276,7 @@
           </section>
         </section>
 
+        <!-- %%%%%%%%%%%%%%%%%%%% why hci %%%%%%%%%%%%%%%%%%%% -->
         <section>
           <section
             data-background-image="images/xkcd.png"
@@ -359,7 +362,20 @@
           </section>
         </section>
 
-        <!-- %%%%%%%%%%%%%%%%%%%% -->
+        <!-- %%%%%%%%%%%%%%%%%%%% docs %%%%%%%%%%%%%%%%%%%% -->
+        <section data-background-color="white">
+          <iframe
+            src="https://normalize.cancervariants.org/therapy/"
+            width="1800px"
+            height="1000px"
+          ></iframe>
+          <aside class="notes">
+            Line up parameters in easily-recallable location rather than hiding
+            them in the URL
+          </aside>
+        </section>
+
+        <!-- %%%%%%%%%%%%%%%%%%%% SECTION 3 %%%%%%%%%%%%%%%%%%%% -->
         <section>
           <section
             data-background-image="images/404.png"
@@ -453,6 +469,13 @@
             <h3>World</h3>
             <p class="fragment" data-fragment-index="7">
               &larr; reciprocity &rarr;
+            </p>
+          </section>
+          <section>
+            <h3>Delay matters!</h3>
+            <p>Immediacy of feedback is ideal</p>
+            <p>
+              Superfluousness or delay strains the user's processing faculties
             </p>
           </section>
           <section>
@@ -565,23 +588,16 @@
               The typing of it all is obnoxious -- contributes to annoyance
             </aside>
           </section>
-          <section>
-            <blockquote>
-              "Feedback must be immediate: even a delay of a tenth of a second
-              can be disconcerting. If the delay is too long, people often give
-              up, going off to do other activities."
-            </blockquote>
-            <small>
-              Norman, D. (2013). The Design of Everyday Things: Revised and
-              Expanded Edition. (pp. 23). Arizona: Basic Books.
-            </small>
-          </section>
           <section data-background-color="white">
             <iframe
               src="https://normalize.cancervariants.org/therapy/"
               width="1800px"
               height="1000px"
             ></iframe>
+            <aside class="notes">
+              Parameter options are explicit and described. Output is
+              immediately visible and in a digestable format.
+            </aside>
           </section>
         </section>
 
@@ -623,6 +639,17 @@
             </p>
           </section>
           <section>
+            <h3>Not a linear benefit!</h3>
+            <img data-src="images/language-power-figure.png" width="50%" />
+            <p>
+              <small>
+                Hutchins, E. L., Hollan, J. D., & Norman, D. A. (1985). Direct
+                manipulation interfaces. Human–Computer Interaction, 1(4),
+                311-338.
+              </small>
+            </p>
+          </section>
+          <section>
             <blockquote>
               "REST components communicate by transferring a representation of a
               resource... selected dynamically based on the capabilities or
@@ -633,17 +660,6 @@
               Network-based Software Architectures. Doctoral dissertation,
               University of California, Irvine, 2000.
             </small>
-          </section>
-          <section>
-            <h3>Not a linear benefit!</h3>
-            <img data-src="images/language-power-figure.png" width="50%" />
-            <p>
-              <small>
-                Hutchins, E. L., Hollan, J. D., & Norman, D. A. (1985). Direct
-                manipulation interfaces. Human–Computer Interaction, 1(4),
-                311-338.
-              </small>
-            </p>
           </section>
           <section>
             <blockquote>
@@ -659,11 +675,7 @@
             </small>
           </section>
           <section>
-            <blockquote>
-              "Compared to biologists and bioinformaticians, computational
-              scientists held a higher expectation in Understandability and a
-              stronger need for Concise representation."
-            </blockquote>
+            <img data-src="images/dimensions-rotated.png" width="80%" />
             <small>
               Huang, H.. “Domain knowledge and data quality perceptions in
               genome curation work.” J. Documentation 71 (2015): 116-142.
@@ -678,6 +690,10 @@
               width="1800px"
               height="1000px"
             ></iframe>
+            <aside class="notes">
+              Different endpoints and parameters let us specify breadth and
+              output
+            </aside>
           </section>
         </section>
 
@@ -717,7 +733,7 @@
           </section>
           <section data-background-color="white">
             <img data-src="images/notes.png" width="60%" />
-            <small style="color:black">
+            <small style="color: black">
               Sarah Morrison-Smith, Christina Boucher, Andrea Bunt, and Jaime
               Ruiz. 2015. Elucidating the role and use of bioinformatics
               software in life science research. In Proceedings of the 2015
@@ -726,6 +742,14 @@
               DOI:https://doi.org/10.1145/2783446.2783581
             </small>
           </section>
+          <section>
+            <h3>A request:</h3>
+            <p>
+              https://normalize.cancervariants.org/therapy/search?<u>q=aspirin</u>&<u>keyed=true</u>&<u
+                >excl=wikidata</u
+              >
+            </p>
+          </section>
           <section data-background-color="white">
             <iframe
               src="https://normalize.cancervariants.org/therapy/"
@@ -733,19 +757,26 @@
               height="1000px"
             ></iframe>
             <aside class="notes">
-              Line up parameters in easily-recallable location rather than
-              hiding them in the URL
+              Emphasis on easy access back to input parameters. Line up
+              parameters in easily-recallable location rather than hiding them
+              in the URL
             </aside>
           </section>
         </section>
+        <section>
+          <h3>Further Reading</h3>
+          <ul>
+            <li>Don Norman, The Design of Everyday Things (2013)</li>
+            <li>
+              Ko Lab,
+              <a href="https://medium.com/bits-and-behavior"
+                >Bits and Behavior</a
+              >
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
-
-    <!--
-       representation - pydantic models???
-       mapping
-       correspondence between model and world - REST
-    -->
 
     <script src="dist/reveal.js"></script>
     <script src="plugin/notes/notes.js"></script>
