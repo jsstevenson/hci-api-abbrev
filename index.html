@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-image="images/code-bg-blur.png">
+          <div
+            id="title"
+            style="
+              border-radius: 15px;
+              background: rgba(255, 255, 255, 0.8);
+              padding: 20px;
+            "
+          >
+            <div class="title-text-box">
+              <b>
+                <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                  HCI and Web API Design in Informatics
+                </h2>
+                <p style="color: rgb(80, 80, 80)">James Stevenson</p>
+              </b>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3>Outline</h3>
+          <p></p>
+          <ul>
+            <li>HCI?</li>
+            <li>API??</li>
+            <li>Why HCI</li>
+            <li>Concept: Feedback Cycles</li>
+            <li>Concept: Mapping</li>
+            <li>Concept: Distributed Cognition</li>
+          </ul>
+        </section>
+
+        <section>
+          <section data-background-image="images/dog.png">
+            <div
+              id="title"
+              style="
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+              "
+            >
+              <div class="title-text-box">
+                <b>
+                  <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                    HCI in ~300 Seconds
+                  </h2>
+                </b>
+              </div>
+            </div>
+            <aside class="notes">Your user is a dog in a necktie</aside>
+          </section>
+          <section>
+            <h3>Human-Computer Interaction</h3>
+            <h3>Human-Centered Design & Engineering</h3>
+            <h3>Human Factors Engineering</h3>
+            <h3>User Experience/User Interface Design</h3>
+            <aside class="notes">Goes by many names</aside>
+          </section>
+          <section>
+            <div align="right">
+              <p>Computer science</p>
+              <p>+ Psychology</p>
+              <p>+ Engineering</p>
+              <p>+ Philosophy</p>
+              <hr />
+              <p>= HCI</p>
+            </div>
+            <aside class="notes">
+              A product of necessity - the computer became personal in the 80s.
+              Businesses drew upon diverse sources of expertise to make sure
+              they were reaching normal humans.
+            </aside>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                  ### "Definition" (tautological)
+
+                  > HCI studies the ways that humans interact with computers.
+              </textarea
+            >
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                  ### "Definition" (practical)
+
+                  > How can computers **provide** successful interactions with humans?
+
+                  * Theory (conceptual models)
+                  * Research (observation, evaluation, needfinding)
+                  * Engineering (build things, produce useability protocols)
+              </textarea
+            >
+            <aside class="notes">
+              Freeze humans as a dependent variable - manipulate or effect them
+              by way of interface design
+            </aside>
+          </section>
+          <section>
+            <p>HCI theory is rarely counterintuitive, but often insightful</p>
+            <aside class="notes">
+              Insightful in how it helps us build more robust checkboxes in what
+              we show to the user and how we show it. Invites some more specific
+              questions.
+            </aside>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                ### Humans
+
+                * Physical bodies
+                * Various parts work differently, inconsistently
+                * The brain is pretty important and not exempt from the above
+              </textarea
+            >
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                ### Computers
+
+                * No surprises here
+              </textarea
+            >
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                ### Interactions
+
+                * Variety of modes
+                * Specific tasks
+                * Goals
+                * (Implicit) metrics for success or failure
+              </textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <section data-background-image="images/log.png">
+            <div
+              id="title"
+              style="
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+              "
+            >
+              <div class="title-text-box">
+                <b>
+                  <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                    Web APIs: Acronym Soup
+                  </h2>
+                </b>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>API?</h3>
+            <hr />
+            <p><b>A</b>pplication</p>
+            <p><b>P</b>rogramming</p>
+            <p><b>I</b>nterface</p>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                > a set of code features (e.g. methods, properties, events, and URLs) that a developer can use in their apps for interacting with components of a user's web browser, or other software/hardware on the user's computer, or third party websites and services
+
+                source: [MDN](https://developer.mozilla.org/en-US/docs/Glossary/API)
+            </textarea>
+            <aside class="notes">
+              This differs somewhat from how HCI views APIs - they usually think
+              about them in the sense of a programming language or software
+              tool, not in the sense of the web. That's where almost all of the
+              research on API design is focused.
+            </aside>
+          </section>
+          <section>
+            <h3>API architectures</h3>
+            <ul>
+              <li>RPC: requests as function calls.</li>
+              <li>SOAP: XML. Resource-based; abstracted. Retro.</li>
+              <li>
+                REST: URL/JSON (typically). Resource-based; exposed. Popular.
+              </li>
+              <li>GraphQL: Field- and type-based. Fashionable.</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Web APIs, for our purposes</h3>
+            <img data-src="images/metakb-architecture.png" />
+            <p>Concept records (like a drug or a gene) are <u>resources</u>*</p>
+          </section>
+          <section>
+            <h3>A request:</h3>
+            <p>
+              https://normalize.cancervariants.org/therapy/search?<u>q=aspirin</u>&<u>keyed=true</u>&<u
+                >excl=wikidata</u
+              >
+            </p>
+          </section>
+          <section>
+            <h3>A request, under the hood:</h3>
+            <div align="left">
+              <small>
+                <p>
+                  GET /therapy/search?q=aspirin&keyed=true&excl=wikidata
+                  HTTP/1.1
+                </p>
+                <p>Host: normalize.cancervariants.org</p>
+                <p>
+                  User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15;
+                  rv:85.0) Gecko/20100101 Firefox/85.0
+                </p>
+                <p>
+                  Accept:
+                  text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+                </p>
+                <p>Accept-Language: en-US,en;q=0.5</p>
+                <p>Accept-Encoding: gzip, deflate, br</p>
+                <p>Connection: keep-alive</p>
+                <p>Cookie: _ga=GA1.2.671784006.1603812696</p>
+                <p>Upgrade-Insecure-Requests: 1</p>
+                <p>Cache-Control: max-age=0</p>
+              </small>
+            </div>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                ### A response:
+                ```
+                {
+                  "query": "drugbank:DB11210",
+                  "warnings": null,
+                  "source_matches": {
+                  "RxNorm": {
+                    "match_type": 0,
+                    "records": [],
+                    "meta_": {
+                    "data_license": "UMLS Metathesaurus",
+                    "data_license_url": "https://www.nlm.nih.gov/research/umls/rxnorm/docs/termsofservice.html",
+                    "version": "20210104",
+                    "data_url": "https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html",
+                    "rdp_url": null,
+                  }
+                }
+                ```
+              </textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <section
+            data-background-image="images/xkcd.png"
+            data-background-size="contain"
+            data-background-repeat="no-repeat"
+            data-background-color="white"
+          >
+            <div
+              id="title"
+              style="
+                background: rgba(255, 255, 255, 0.95);
+                border-color: black;
+                border-style: solid;
+                border-width: thin;
+                padding: 20px;
+                border-radius: 15px;
+              "
+            >
+              <b>
+                <h2
+                  style="
+                    color: rgb(80, 80, 80);
+                    text-transform: none;
+                    margin: 30px;
+                  "
+                >
+                  Why HCI?
+                </h2>
+              </b>
+            </div>
+          </section>
+          <section>
+            <h3>Why HCI for James</h3>
+            <ul>
+              <li>Thought "visual design = not my cup of tea"</li>
+              <li>BUT! Took a class on it anyway</li>
+              <li>Now interested in HCI in terms of software tools</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+                ### Why HCI for informatics
+
+                * "Developer Experience"/"End-User Programming":
+                   * Scientists and software engineers are humans too!
+                   * Remember the "I" in API!
+                * Formalize assumptions about use-cases and interactions
+                * Identify systemic issues that lead us to write buggy/ineffective software
+            </textarea>
+          </section>
+          <section>
+            <blockquote>
+              "A programming language is precisely in the spirit of a tool: It
+              is a set of operations and construction procedures that allows a
+              machine to do anything doable, unrestricted by conventions or
+              preconceived notions."
+            </blockquote>
+            <small>
+              Norman, D. A. (1986). Cognitive engineering. In D. A. Norman & S.
+              W. Draper (Eds.) User-Centered System Design: New Perspectives on
+              Human-Computer Interaction. (pp. 32-61). Hillsdale, NJ: Lawrence
+              Erlbaum Associates.
+            </small>
+          </section>
+          <section>
+            <blockquote>
+              <p style="font-style: italic">
+                "The CS researchers identified their primary focus as the
+                development of an algorithm or a computational technique... In
+                contrast, MBB researchers focused on the biological problem and
+                how computational tools could be used to aid or enhance
+                understanding of a concept."
+              </p>
+            </blockquote>
+            <small>
+              Parmit K. Chilana, Carole L. Palmer, and Amy J. Ko. 2009.
+              Comparing bioinformatics software development by computer
+              scientists and biologists: An exploratory study. In Proceedings of
+              the 2009 ICSE Workshop on Software Engineering for Computational
+              Science and Engineering (SECSE '09). IEEE Computer Society, USA,
+              72–79. DOI:https://doi.org/10.1109/SECSE.2009.5069165
+            </small>
+          </section>
+        </section>
+
+        <!-- %%%%%%%%%%%%%%%%%%%% -->
+        <section>
+          <section
+            data-background-image="images/404.png"
+            data-background-size="contain"
+            data-background-color="white"
+            data-background-position="top"
+          >
+            <div
+              id="title"
+              style="
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                border-color: black;
+                border-style: solid;
+                border-width: 1px;
+              "
+            >
+              <div class="title-text-box">
+                <b>
+                  <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                    Concept: Feedback Cycles
+                  </h2>
+                </b>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Feedback Cycles</h3>
+            <p>
+              What are we trying to do when we pick up a tool (new or familiar)?
+            </p>
+            <p>How do we figure out how to do it?</p>
+            <p>What if it doesn't work?</p>
+            <hr />
+            <p>How do these considerations affect user-oriented design?</p>
+          </section>
+          <section>
+            <blockquote>
+              "When people use something, they face two gulfs: the Gulf of
+              Execution, where they try to figure out how it operates, and the
+              Gulf of Evaluation, where they try to figure out what happened."
+            </blockquote>
+            <small>
+              Norman, D. (2013). The Design of Everyday Things: Revised and
+              Expanded Edition. (pp. 1-36). Arizona: Basic Books.
+            </small>
+          </section>
+          <section>
+            <img data-src="images/gulfs.png" width="50%" />
+            <small>
+              Norman, D. A. (1986). Cognitive engineering. In D. A. Norman & S.
+              W. Draper (Eds.) User-Centered System Design: New Perspectives on
+              Human-Computer Interaction. (pp. 32-61). Hillsdale, NJ: Lawrence
+              Erlbaum Associates.
+            </small>
+          </section>
+          <section>
+            <img data-src="images/bridges.png" width="50%" />
+            <small>
+              Norman, D. A. (1986). Cognitive engineering. In D. A. Norman & S.
+              W. Draper (Eds.) User-Centered System Design: New Perspectives on
+              Human-Computer Interaction. (pp. 32-61). Hillsdale, NJ: Lawrence
+              Erlbaum Associates.
+            </small>
+          </section>
+          <section>
+            <style>
+              .container {
+                display: flex;
+              }
+              .col {
+                flex: 1;
+              }
+            </style>
+
+            <h3>Goal</h3>
+            <div class="container">
+              <div class="col">
+                <p class="fragment" data-fragment-index="1">Plan</p>
+                <p class="fragment" data-fragment-index="2">Specify</p>
+                <p class="fragment" data-fragment-index="3">Perform</p>
+              </div>
+
+              <div class="col">
+                <p class="fragment" data-fragment-index="6">Compare</p>
+                <p class="fragment" data-fragment-index="5">Interpret</p>
+                <p class="fragment" data-fragment-index="4">Perceive</p>
+              </div>
+            </div>
+            <h3>World</h3>
+            <p class="fragment" data-fragment-index="7">
+              &larr; reciprocity &rarr;
+            </p>
+          </section>
+          <section>
+            <h3>A MetaKB user's task:</h3>
+            <p>
+              Given a drug term, return a normalized concept, along with some
+              relevant attributes and metadata
+            </p>
+            <ul>
+              <li>What's included?</li>
+              <li>Where is it?</li>
+            </ul>
+          </section>
+
+          <section data-markdown>
+            <textarea data-template>
+                  ```json
+                  {
+                    "query": "imatinib",
+                    "warnings": null,
+                    "match_type": 80,
+                    "record": {
+                        "label": "imatinib",
+                        "concept_ids": [
+                            "rxcui:282388",
+                            "ncit:C62035",
+                            "chemidplus:152459-95-5",
+                            "wikidata:Q177094"
+                        ],
+                        "aliases": [
+                            "Imatinib",
+                            "QTI571",
+                            "STI 571",
+                            "STI571",
+                            "4-(4-methyl-piperazin-1-ylmethyl)-N-[4-methyl-3-(4-pyridin-3-yl-pyrimidin-2-ylamino)-phenyl]-benzamide",
+                            "4-[(4-Methyl-1-piperazinyl)methyl]-N-[4-methyl-3-[[4-(3-pyridinyl)-2-pyrimidinyl]amino]phenyl]benzamide",
+                            "CGP 57148",
+                            "IMATINIB",
+                            "α-(4-methyl-1-piperazinyl)-3'-((4-(3-pyridyl)-2-pyrimidinyl)amino)-p-toluidide",
+                            "alpha-(4-methyl-1-piperazinyl)-3'-{[4-(3-pyridyl)-2-pyrimidinyl]amino}-P-toluidide",
+                            "Alpha-(4-methyl-1-piperazinyl)-3'-((4-(3-pyridyl)-2-pyrimidinyl)amino)-p-tolu-p-toluidide"
+                        ],
+                        "trade_names": ["Gleevec"],
+                        "xrefs": [
+                            "mmsl:d04758",
+                            "fda:BKJ8M8G5HI",
+                            "pubchem.compound:5291",
+                            "mesh:D000068877",
+                            "atc:L01XE01",
+                            "vandf:4021257",
+                            "mthspl:BKJ8M8G5HI",
+                            "umls:C0935989"
+                        ]
+                    }
+                }
+                ```
+              </textarea
+            >
+          </section>
+          <section>
+            <p align="left">
+              {"query": ""Platinol", "warnings": "null,"match_type":
+              "80,"record": "{"label": ""cisplatin", "concept_ids":
+              "["rxcui:2555", "ncit:C376", "chemidplus:15663-27-1",
+              "wikidata:Q412415", "wikidata:Q47522001"],"aliases": "["cis
+              Platinum", "cis-Diaminedichloroplatinum",
+              "cis-Dichlorodiammineplatinum(II)", "CDDP", "Platinol",
+              "cis-Diamminedichloroplatinum", "Platinol-AQ",
+              "cis-Diamminedichloroplatinum(II)", "CISplatin",
+              "Diamminodichloride, Platinum", "cis Diamminedichloroplatinum",
+              "Platinum Diamminodichloride", "cis-diamminedichloroplatinum(II)",
+              "DDP", "CIS-DDP", "1,2-Diaminocyclohexaneplatinum II citrate",
+              "Cis-DDP", "Dichlorodiammineplatinum",
+              "cis-Platinum"],"trade_names": "["Platinol", "Cisplatin"],"xrefs":
+              "["pubchem.compound:5702198", "atc:L01XA01", "fda:Q20Q21Q62J",
+              "mesh:D002945", "usp:m17910", "mthspl:Q20Q21Q62J",
+              "vandf:4018139", "umls:C0008838", "mmsl:d00195", "mmsl:31747",
+              "mmsl:4456"]},"meta_": "{"RxNorm": "{"data_license": ""UMLS
+              Metathesaurus", "data_license_url":
+              ""https://www.nlm.nih.gov/research/umls/rxnorm/docs/termsofservice.html",
+              "version": ""20210104", "data_url":
+              ""https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html",
+              "rdp_url": "null,"data_license_attributes": "{"non_commercial":
+              "false,"attribution": "true,"share_alike": "false}},"NCIt":
+              "{"data_license": ""CC BY 4.0", "data_license_url":
+              ""https://creativecommons.org/licenses/by/4.0/legalcode",
+              "version": ""20.09d", "data_url":
+              ""https://evs.nci.nih.gov/ftp1/NCI_Thesaurus/archive/20.09d_Release/",
+              "rdp_url": ""http://reusabledata.org/ncit.html",
+              "data_license_attributes": "{"non_commercial":
+              "false,"attribution": "true,"share_alike": "false}},"ChemIDplus":
+              "{"data_license": ""custom", "data_license_url":
+              ""https://www.nlm.nih.gov/databases/download/terms_and_conditions.html",
+              "version": ""20200327", "data_url":
+              ""ftp://ftp.nlm.nih.gov/nlmdata/.chemidlease/", "rdp_url":
+              "null,"data_license_attributes": "{"non_commercial":
+              "false,"attribution": "true,"share_alike": "false}},"Wikidata":
+              "{"data_license": ""CC0 1.0", "data_license_url":
+              ""https://creativecommons.org/publicdomain/zero/1.0/", "version":
+              ""20200812", "data_url": "null,"rdp_url":
+              "null,"data_license_attributes": "{"non_commercial":
+              "false,"attribution": "false,"share_alike": "false}}}}
+            </p>
+          </section>
+          <section
+            data-background-image="images/ipython-requests.png"
+            data-background-size="cover"
+          >
+            <aside class="notes">
+              The typing of it all is obnoxious -- contributes to annoyance
+            </aside>
+          </section>
+          <section>
+            <blockquote>
+              "Feedback must be immediate: even a delay of a tenth of a second
+              can be disconcerting. If the delay is too long, people often give
+              up, going off to do other activities."
+            </blockquote>
+            <small>
+              Norman, D. (2013). The Design of Everyday Things: Revised and
+              Expanded Edition. (pp. 23). Arizona: Basic Books.
+            </small>
+          </section>
+          <section data-background-color="white">
+            <iframe
+              src="https://normalize.cancervariants.org/therapy/"
+              width="1800px"
+              height="1000px"
+            ></iframe>
+          </section>
+        </section>
+
+        <!-- %%%%%%%%%%%%%%%%%%%% SECTION 2 %%%%%%%%%%%%%%%%%%%% -->
+        <section>
+          <section data-background-image="images/spiderman.jpg">
+            <div
+              id="title"
+              style="
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+              "
+            >
+              <div class="title-text-box">
+                <b>
+                  <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                    Concept: Mapping
+                  </h2>
+                </b>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h3>Mapping</h3>
+            <p>Directness of relationship between input and output</p>
+            <p>Specificity of purpose; 1 to 1</p>
+            <p>Appropriateness of scale/power</p>
+          </section>
+          <section data-background-color="white">
+            <img data-src="images/burners-1.png" width="35%" />
+            <img data-src="images/burners-2.png" width="43%" />
+            <p style="color: black">
+              <small>
+                Norman, D. (2002). Chapter 3: Knowledge in the Head and in the
+                World. In The Design of Everyday Things (pp. 76-77). Arizona:
+                Basic Books.
+              </small>
+            </p>
+          </section>
+          <section>
+            <blockquote>
+              "REST components communicate by transferring a representation of a
+              resource... selected dynamically based on the capabilities or
+              desires of the recipient and the nature of the resource."
+            </blockquote>
+            <small>
+              Fielding, Roy Thomas. Architectural Styles and the Design of
+              Network-based Software Architectures. Doctoral dissertation,
+              University of California, Irvine, 2000.
+            </small>
+          </section>
+          <section>
+            <h3>Not a linear benefit!</h3>
+            <img data-src="images/language-power-figure.png" width="50%" />
+            <p>
+              <small>
+                Hutchins, E. L., Hollan, J. D., & Norman, D. A. (1985). Direct
+                manipulation interfaces. Human–Computer Interaction, 1(4),
+                311-338.
+              </small>
+            </p>
+          </section>
+          <section>
+            <blockquote>
+              "Traditional hypertext systems… use unique node or document
+              identifiers that change every time the information changes... REST
+              relies instead on the author choosing a resource identifier that
+              best fits the nature of the concept being identified."
+            </blockquote>
+            <small>
+              Fielding, Roy Thomas. Architectural Styles and the Design of
+              Network-based Software Architectures. Doctoral dissertation,
+              University of California, Irvine, 2000.
+            </small>
+          </section>
+          <section>
+            <blockquote>
+              "Compared to biologists and bioinformaticians, computational
+              scientists held a higher expectation in Understandability and a
+              stronger need for Concise representation."
+            </blockquote>
+            <small>
+              Huang, H.. “Domain knowledge and data quality perceptions in
+              genome curation work.” J. Documentation 71 (2015): 116-142.
+            </small>
+            <aside class="notes">
+              GraphQL -- only get exactly what you ask for
+            </aside>
+          </section>
+          <section data-background-color="white">
+            <iframe
+              src="https://normalize.cancervariants.org/therapy/"
+              width="1800px"
+              height="1000px"
+            ></iframe>
+          </section>
+        </section>
+
+        <!-- %%%%%%%%%%%%%%%%%%%% SECTION 3 %%%%%%%%%%%%%%%%%%%% -->
+        <section>
+          <section
+            data-background-image="images/andy_clark.webp"
+            data-background-position="top"
+          >
+            <div
+              id="title"
+              style="
+                border-radius: 15px;
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+              "
+            >
+              <div class="title-text-box">
+                <b>
+                  <h2 style="color: rgb(80, 80, 80); text-transform: none">
+                    Concept: Distributed Cognition
+                  </h2>
+                </b>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Distributed Cognition</h2>
+            <div align="left">
+              <p>~Where does the brain end and the world begin, man~</p>
+              <p>
+                Interfaces/tools diminish cognitive load by "doing thinking for
+                us"
+              </p>
+              <p>Memory takes many forms</p>
+            </div>
+          </section>
+          <section data-background-color="white">
+            <img data-src="images/notes.png" width="60%" />
+            <small style="color:black">
+              Sarah Morrison-Smith, Christina Boucher, Andrea Bunt, and Jaime
+              Ruiz. 2015. Elucidating the role and use of bioinformatics
+              software in life science research. In Proceedings of the 2015
+              British HCI Conference (British HCI '15). Association for
+              Computing Machinery, New York, NY, USA, 230–238.
+              DOI:https://doi.org/10.1145/2783446.2783581
+            </small>
+          </section>
+          <section data-background-color="white">
+            <iframe
+              src="https://normalize.cancervariants.org/therapy/"
+              width="1800px"
+              height="1000px"
+            ></iframe>
+            <aside class="notes">
+              Line up parameters in easily-recallable location rather than
+              hiding them in the URL
+            </aside>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <!--
+       representation - pydantic models???
+       mapping
+       correspondence between model and world - REST
+    -->
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
